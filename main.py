@@ -2,6 +2,7 @@ import random
 
 def create_user(username):
     print("Hello " + username)
+    return username
 
 
 def game_interface():
@@ -51,10 +52,10 @@ def create_game():
 
         if p % 2 == 0:
             print("PLAYER:" + players[0])
-            print(coins_one)
+            print(f'Your coins: {coins_one}')
         else:
             print("PLAYER:" + players[1])
-            print(coins_two)
+            print(f'Your coins: {coins_two}')
 
         player_decision = game_interface()
 
@@ -175,13 +176,28 @@ def create_game():
             case _:
                 print("Please, choose again.")
 
+
+    save = input("Do you want save your result? [Y/N]")
+    if save in ('Y','y'):
+        with open('save.txt', 'a') as fileObj:
+            if coins_one > coins_two and surrender == False:
+                fileObj.write(f'Winner is: {player1} , and he wins with score: {coins_one}\n')
+                print("Player 1 wins!")
+            elif coins_one < coins_two and surrender == False:
+                fileObj.write(f'Winner is: {player2} , and he wins with score: {coins_two}\n')
+                print("Player 2 wins!")
+            elif coins_one == coins_two and surrender == False:
+                print("Draw!")
+                fileObj.write('Nobody wins!\n')
+    else:
+        if coins_one > coins_two and surrender == False:
+            print("Player 1 wins!")
+        elif coins_one < coins_two and surrender == False:
+            print("Player 2 wins!")
+        elif coins_one == coins_two and surrender == False:
+            print("Draw!")
+
     print("Thank you for playing!")
 
-    if coins_one > coins_two and surrender == False:
-        print("Player 1 wins!")
-    elif coins_one < coins_two and surrender == False:
-        print("Player 2 wins!")
-    elif coins_one == coins_two and surrender == False:
-        print("Draw!")
 
 new_game = create_game()
