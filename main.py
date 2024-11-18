@@ -24,6 +24,11 @@ def army_management():
           "\nWhat do you want to do?: ")
 
 
+def clear_screen():
+    for i in range(1, 10):
+        print("\n")
+
+
 def create_game():
     player1 = input("What is your name? [PLAYER 1]\n")
     create_user(player1)
@@ -33,8 +38,8 @@ def create_game():
 
     players = [player1, player2]
 
-    p = 0
-    i = 1
+    person = 0
+    turn = 1
 
     surrender = False
 
@@ -46,11 +51,10 @@ def create_game():
     player_one = []
     player_two = []
 
-    while i < 11:
-        print("\nTURN: ")
-        print(i)
+    while turn < 11:
+        print(f'\nTURN: {turn}')
 
-        if p % 2 == 0:
+        if person % 2 == 0:
             print("PLAYER:" + players[0])
             print(f'Your coins: {coins_one}')
         else:
@@ -62,6 +66,7 @@ def create_game():
         match player_decision:
 
             case "1":
+                clear_screen()
                 print("Add soldier to army:")
                 manage = army_management()
                 match manage:
@@ -84,7 +89,7 @@ def create_game():
                         print("Please, choose again.")
                         continue
                 if soldier:
-                    if p % 2 == 0:
+                    if person % 2 == 0:
                         if coins_one >= 10 * int(manage):
                             player_one.append(soldier)
                             print(message)
@@ -101,6 +106,7 @@ def create_game():
                 continue
 
             case "2":
+                clear_screen()
                 print("Sell soldier from army:")
                 manage = army_management()
                 match manage:
@@ -123,7 +129,7 @@ def create_game():
                         print("Please, choose again.")
                         continue
                 if soldier:
-                    if p % 2 == 0:
+                    if person % 2 == 0:
                         if soldier in player_one:
                             player_one.remove(soldier)
                             print(message)
@@ -140,10 +146,11 @@ def create_game():
                 continue
 
             case "3":
+                clear_screen()
                 print("Order maneuvers")
                 print(random.randint(1, 4))
                 if soldier:
-                    if p % 2 == 0:
+                    if person % 2 == 0:
                         for soldier in player_one:
                             player_one.update()
                         coins_one -= 50
@@ -154,8 +161,9 @@ def create_game():
                 continue
 
             case "4":
+                clear_screen()
                 print("Check army")
-                if p % 2 == 0:
+                if person % 2 == 0:
                     for soldier in player_one:
                         print(f"Rank: {soldier['rank']}, Experience: {soldier['experience']}")
                 else:
@@ -163,23 +171,25 @@ def create_game():
                         print(f"Rank: {soldier['rank']}, Experience: {soldier['experience']}")
                 continue
             case "5":
-                p = 1 - p
-                if p == 0:
-                    i += 1
+                clear_screen()
+                person = 1 - person
+                if person == 0:
+                    turn += 1
                     coins_one += 10
                     coins_two += 10
                 continue
             case "6":
-                print(f"{players[p]} surrenders! {players[1 - p]} wins!")
+                clear_screen()
+                print(f"{players[person]} surrenders! {players[1 - person]} wins!")
                 surrender = True
                 break
             case _:
                 print("Please, choose again.")
 
-
+    clear_screen()
     save = input("Do you want save your result? [Y/N]")
     if save in ('Y','y'):
-        with open('save.txt', 'a') as fileObj:
+        with open('results.txt', 'a') as fileObj:
             if coins_one > coins_two and surrender == False:
                 fileObj.write(f'Winner is: {player1} , and he wins with score: {coins_one}\n')
                 print("Player 1 wins!")
