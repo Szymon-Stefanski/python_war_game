@@ -9,7 +9,7 @@ def game_interface():
     return input("What do you want to do?:"
                      "\n1.Add soldier to army"
                      "\n2.Sell soldier from army"
-                     "\n3.Order maneuvers"
+                     "\n3.Promote soldier"
                      "\n4.Check army"
                      "\n5.End turn."
                      "\n6.Capitulation.\n")
@@ -27,6 +27,36 @@ def army_management():
 def clear_screen():
     for i in range(1, 10):
         print("\n")
+
+
+def soldier_upgrade(arr):
+    s_number = random.randint(0, len(arr) - 1)
+    match arr[s_number]["rank"]:
+        case "private":
+            arr[s_number]["rank"] = "corporal"
+            arr[s_number]["experience"] = 2
+            print('Private has been promoted to Corporal!!!')
+
+        case "corporal":
+            arr[s_number]["rank"] = "captain"
+            arr[s_number]["experience"] = 3
+            print('Corporal has been promoted to Captain!!!')
+
+        case "captain":
+            arr[s_number]["rank"] = "sergeant"
+            arr[s_number]["experience"] = 4
+            print('Captain has been promoted to Sergeant!!!')
+
+        case "sergeant":
+            arr[s_number]["rank"] = "major"
+            arr[s_number]["experience"] = 5
+            print('Sergeant has been promoted to Major!!!')
+
+        case "major":
+            print("Already have the highest rank")
+
+        case _:
+            print("You don't have enough money!!!")
 
 
 def create_game():
@@ -147,17 +177,14 @@ def create_game():
 
             case "3":
                 clear_screen()
-                print("Order maneuvers")
-                print(random.randint(1, 4))
+                print("Promote soldiers")
                 if soldier:
-                    if person % 2 == 0:
-                        for soldier in player_one:
-                            player_one.update()
-                        coins_one -= 50
+                    if person % 2 == 0 and coins_one >= 50:
+                        soldier_upgrade(player_one)
+                        coins_one -=50
                     else:
-                        for soldier in player_two:
-                            player_two.update()
-                        coins_two -= 50
+                        soldier_upgrade(player_two)
+                        coins_two -=50
                 continue
 
             case "4":
@@ -165,10 +192,10 @@ def create_game():
                 print("Check army")
                 if person % 2 == 0:
                     for soldier in player_one:
-                        print(f"Rank: {soldier['rank']}, Experience: {soldier['experience']}")
+                        print(f"{soldier['rank']}, Experience: {soldier['experience']}")
                 else:
                     for soldier in player_two:
-                        print(f"Rank: {soldier['rank']}, Experience: {soldier['experience']}")
+                        print(f"{soldier['rank']}, Experience: {soldier['experience']}")
                 continue
             case "5":
                 clear_screen()
@@ -178,16 +205,18 @@ def create_game():
                     coins_one += 10
                     coins_two += 10
                 continue
+
             case "6":
                 clear_screen()
                 print(f"{players[person]} surrenders! {players[1 - person]} wins!")
                 surrender = True
                 break
+
             case _:
                 print("Please, choose again.")
 
-    clear_screen()
     save = input("Do you want save your result? [Y/N]")
+    clear_screen()
     if save in ('Y','y'):
         with open('results.txt', 'a') as fileObj:
             if coins_one > coins_two and surrender == False:
