@@ -33,6 +33,7 @@ During a turn, players can:
 - Sell soldiers for resources.
 - Promote soldiers to higher ranks.
 - Inspect the composition of their army.
+- Attack enemy army.
 - End their turn or surrender the game.
 
 ### 5. Victory Conditions
