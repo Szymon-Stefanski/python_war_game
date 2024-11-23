@@ -16,8 +16,9 @@ class Game(object):
                          "\n2.Sell soldier from army"
                          "\n3.Promote soldier"
                          "\n4.Check army"
-                         "\n5.End turn."
-                         "\n6.Capitulation.\n")
+                         "\n5.Attack"
+                         "\n6.End turn."
+                         "\n7.Capitulation.\n")
 
 
     @staticmethod
@@ -64,6 +65,42 @@ class Game(object):
 
             case _:
                 print("You don't have enough money!!!")
+
+
+    def attack_army(self, arr):
+        if len(arr) > 0:
+            s_number = random.randint(0, len(arr) - 1)
+            match arr[s_number]["rank"]:
+                case "private":
+                    arr[s_number]["rank"] = "private"
+                    arr[s_number]["experience"] = 0
+                    print('Private has been killed!!!')
+
+                case "corporal":
+                    arr[s_number]["rank"] = "corporal"
+                    arr[s_number]["experience"] = 0
+                    print('Corporal has been killed!!!')
+
+                case "captain":
+                    arr[s_number]["rank"] = "captain"
+                    arr[s_number]["experience"] = 0
+                    print('Captain has been promoted killed!!!')
+
+                case "sergeant":
+                    arr[s_number]["rank"] = "sergeant"
+                    arr[s_number]["experience"] = 0
+                    print('Sergeant has been killed!!!')
+
+                case "major":
+                    arr[s_number]["rank"] = "major"
+                    arr[s_number]["experience"] = 0
+                    print("Major has been killed!!!")
+
+            for soldier in arr:
+                if soldier["experience"] == 0:
+                    arr.remove(soldier)
+        else:
+            print("You can't attack now!")
 
 
     def create_game(self):
@@ -189,9 +226,11 @@ class Game(object):
                         if person % 2 == 0 and coins_one >= 50:
                             self.soldier_promote(player_one)
                             coins_one -=50
-                        else:
+                        elif person % 2 == 1 and coins_two >= 50:
                             self.soldier_promote(player_two)
                             coins_two -=50
+                        else:
+                            print('Invalid output')
                     continue
 
                 case "4":
@@ -204,7 +243,21 @@ class Game(object):
                         for soldier in player_two:
                             print(f"{soldier['rank']}, Experience: {soldier['experience']}")
                     continue
+
                 case "5":
+                    self.clear_screen()
+                    print('Attack enemy army')
+                    if person % 2 == 0 and coins_one >= 50:
+                        self.attack_army(player_two)
+                        coins_one -= 50
+                    elif person % 2 == 1 and coins_two >= 50:
+                        self.attack_army(player_one)
+                        coins_two -= 50
+                    else:
+                        print('Invalid output')
+                    continue
+
+                case "6":
                     self.clear_screen()
                     person = 1 - person
                     if person == 0:
@@ -213,7 +266,7 @@ class Game(object):
                         coins_two += 10
                     continue
 
-                case "6":
+                case "7":
                     self.clear_screen()
                     print(f"{players[person]} surrenders! {players[1 - person]} wins!")
                     surrender = True
