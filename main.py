@@ -222,27 +222,34 @@ class Game(object):
                 case _:
                     print("Please, choose again.")
 
+        experience_one = sum(soldier["experience"] for soldier in player_one)
+        experience_two = sum(soldier["experience"] for soldier in player_two)
+
+        result_one = coins_one + (20 * experience_one)
+        result_two = coins_two + (20 * experience_two)
+
         save = input("Do you want save your result? [Y/N]")
         self.clear_screen()
         if save in ('Y','y'):
             with open('results.txt', 'a') as fileObj:
-                if coins_one > coins_two and surrender == False:
-                    fileObj.write(f'Winner is: {player1} , and he wins with score: {coins_one}\n')
+                if result_one > result_two and surrender == False:
+                    fileObj.write(f'Winner is: {player1} , and he wins with score: {result_one}\n')
                     print("Player 1 wins!")
-                elif coins_one < coins_two and surrender == False:
-                    fileObj.write(f'Winner is: {player2} , and he wins with score: {coins_two}\n')
+                elif result_one < result_two and surrender == False:
+                    fileObj.write(f'Winner is: {player2} , and he wins with score: {result_two}\n')
                     print("Player 2 wins!")
-                elif coins_one == coins_two and surrender == False:
+                elif result_one == result_two and surrender == False:
                     print("Draw!")
                     fileObj.write('Nobody wins!\n')
         else:
-            if coins_one > coins_two and surrender == False:
+            if result_one > result_two and surrender == False:
                 print("Player 1 wins!")
-            elif coins_one < coins_two and surrender == False:
+            elif result_one < result_two and surrender == False:
                 print("Player 2 wins!")
-            elif coins_one == coins_two and surrender == False:
+            elif result_one == result_two and surrender == False:
                 print("Draw!")
 
+        print('Result Player 1: ' + str(result_one) + '\nResult Player 2: ' + str(result_two))
         print("Thank you for playing!")
 
 
