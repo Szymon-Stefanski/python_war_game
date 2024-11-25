@@ -27,22 +27,28 @@ This Python-based war game is a turn-based strategy game for two players, focusi
   - **Sergeant → Major**: +5 experience
 - Promotions require sufficient gold and are subject to limitations.
 
-### 4. Player Actions
+### 4. Attacking the Enemy Army
+Players can weaken their opponent’s forces by attacking their army:
+- A random soldier from the opponent's army is targeted.
+- The targeted soldier's experience is reduced to zero, effectively removing them from the army.
+- If the opponent has no soldiers left, attacks cannot be performed.
+
+### 5. Player Actions
 During a turn, players can:
 - Recruit new soldiers.
 - Sell soldiers for resources.
 - Promote soldiers to higher ranks.
 - Inspect the composition of their army.
-- Attack enemy army.
+- Attack the enemy army.
 - End their turn or surrender the game.
 
-### 5. Victory Conditions
+### 6. Victory Conditions
 - The game ends when:
   - All rounds are completed.
   - A player chooses to surrender.
 - The winner is determined based on the total remaining resources or by forcing the opponent’s surrender.
 
-### 6. Results Saving
+### 7. Results Saving
 - At the end of the game, players can save the results to a file (`results.txt`).
 - Saved data includes the winner and their final score.
 
