@@ -69,36 +69,24 @@ class Game(object):
 
     def attack_army(self, arr):
         if len(arr) > 0:
-            s_number = random.randint(0, len(arr) - 1)
+            s_number = random.randint(0, len(arr)-1)
             match arr[s_number]["rank"]:
                 case "private":
-                    arr[s_number]["rank"] = "private"
-                    arr[s_number]["experience"] = 0
                     print('Private has been killed!!!')
 
                 case "corporal":
-                    arr[s_number]["rank"] = "corporal"
-                    arr[s_number]["experience"] = 0
                     print('Corporal has been killed!!!')
 
                 case "captain":
-                    arr[s_number]["rank"] = "captain"
-                    arr[s_number]["experience"] = 0
                     print('Captain has been promoted killed!!!')
 
                 case "sergeant":
-                    arr[s_number]["rank"] = "sergeant"
-                    arr[s_number]["experience"] = 0
                     print('Sergeant has been killed!!!')
 
                 case "major":
-                    arr[s_number]["rank"] = "major"
-                    arr[s_number]["experience"] = 0
                     print("Major has been killed!!!")
 
-            for soldier in arr:
-                if soldier["experience"] == 0:
-                    arr.remove(soldier)
+            del arr[s_number]
         else:
             print("You can't attack now!")
 
