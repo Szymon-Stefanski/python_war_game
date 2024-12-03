@@ -43,3 +43,9 @@ class TestsGame:
             game = Game()
             result = game.army_management()
             assert result == expected, f"Expected {expected}, but got {result}"
+
+
+    def test_clear_screen(self):
+        game = Game()
+        result = game.clear_screen()
+        assert result == True, f"Expected True, but got {result}"

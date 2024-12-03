@@ -34,6 +34,7 @@ class Game(object):
     def clear_screen():
         for i in range(1, 10):
             print("\n")
+        return True
 
 
     def soldier_promote(arr):
