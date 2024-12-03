@@ -37,7 +37,7 @@ class Game(object):
         return True
 
 
-    def soldier_promote(arr):
+    def soldier_promotion(self, arr):
         s_number = random.randint(0, len(arr) - 1)
         match arr[s_number]["rank"]:
             case "private":
