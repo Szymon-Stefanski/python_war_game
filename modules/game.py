@@ -272,7 +272,7 @@ class Game(object):
         save = input("Do you want save your result? [Y/N]")
         self.clear_screen()
         if save in ('Y','y'):
-            with open('results.txt', 'a') as fileObj:
+            with open('../results.txt', 'a') as fileObj:
                 if result_one > result_two and surrender == False:
                     fileObj.write(f'Winner is: {player1} , and he wins with score: {result_one}\n')
                     print("Player 1 wins!")

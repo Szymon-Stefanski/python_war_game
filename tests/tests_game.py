@@ -1,7 +1,7 @@
 import pytest
 import unittest
 from unittest.mock import patch
-from game import Game
+from modules.game import Game
 
 
 class TestsGame:
