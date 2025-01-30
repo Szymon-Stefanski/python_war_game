@@ -52,9 +52,17 @@ During a turn, players can:
 - At the end of the game, players can save the results to a file (`results.txt`).
 - Saved data includes the winner and their final score.
 
+### 8. Testing with `pytest`  
+- Every core function of the game is covered by unit tests using the `pytest` framework.  
+- The test suite ensures the correctness of:  
+  - Soldier recruitment and selling mechanics.  
+  - Soldier promotion and rank progression.  
+  - Combat system and attack mechanics.  
+  - Game-ending conditions and result saving.  
+- Automated testing helps identify bugs and maintain game logic integrity before implementing new features.
+
 ## Technical Highlights
 - **Static Methods**: Modular static methods handle core functionalities like the game interface and soldier management menu.
 - **Randomized Elements**: Randomized promotions keep gameplay dynamic and unpredictable.
 - **Console Management**: The screen-clearing feature enhances player focus by showing only the current game state.
 - **Interactive Input**: Player decisions drive the game forward, ensuring an engaging experience.
-
