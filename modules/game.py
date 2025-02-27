@@ -91,7 +91,7 @@ class Game(object):
             print("You can't attack now!")
 
 
-    def create_game(self):
+    def __init__(self):
         player1 = input("What is your name? [PLAYER 1]\n")
         self.create_user(player1)
 
