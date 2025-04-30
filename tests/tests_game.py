@@ -55,7 +55,7 @@ class TestsGame:
 
     def test_soldier_promote(self):
         game = Game()
-        result = game.soldier_promote()
+        result = game.soldier_promotion()
         assert result == True, f"Expected True, but got {result}"
 
 
@@ -75,7 +75,7 @@ class TestSoldierPromotion(unittest.TestCase):
     @patch("random.randint", return_value=0)
     def test_private_to_corporal(self, mock_randint):
         game = Game()
-        game.soldier_promote(self.soldiers)
+        game.soldier_promotion(self.soldiers)
         self.assertEqual(self.soldiers[0]["rank"], "corporal")
         self.assertEqual(self.soldiers[0]["experience"], 2)
 
@@ -83,7 +83,7 @@ class TestSoldierPromotion(unittest.TestCase):
     @patch("random.randint", return_value=1)
     def test_corporal_to_captain(self, mock_randint):
         game = Game()
-        game.soldier_promote(self.soldiers)
+        game.soldier_promotion(self.soldiers)
         self.assertEqual(self.soldiers[1]["rank"], "captain")
         self.assertEqual(self.soldiers[1]["experience"], 3)
 
@@ -91,7 +91,7 @@ class TestSoldierPromotion(unittest.TestCase):
     @patch("random.randint", return_value=2)
     def test_captain_to_sergeant(self, mock_randint):
         game = Game()
-        game.soldier_promote(self.soldiers)
+        game.soldier_promotion(self.soldiers)
         self.assertEqual(self.soldiers[2]["rank"], "sergeant")
         self.assertEqual(self.soldiers[2]["experience"], 4)
 
@@ -99,7 +99,7 @@ class TestSoldierPromotion(unittest.TestCase):
     @patch("random.randint", return_value=3)
     def test_sergeant_to_major(self, mock_randint):
         game = Game()
-        game.soldier_promote(self.soldiers)
+        game.soldier_promotion(self.soldiers)
         self.assertEqual(self.soldiers[3]["rank"], "major")
         self.assertEqual(self.soldiers[3]["experience"], 5)
 
@@ -108,7 +108,7 @@ class TestSoldierPromotion(unittest.TestCase):
     def test_major_no_promotion(self, mock_randint):
         with patch("builtins.print") as mock_print:
             game = Game()
-            game.soldier_promote(self.soldiers)
+            game.soldier_promotion(self.soldiers)
             mock_print.assert_called_with("Already have the highest rank")
         self.assertEqual(self.soldiers[4]["rank"], "major")
 
